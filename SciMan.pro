@@ -18,10 +18,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     task.cpp \
-    taskmanager.cpp
+    taskmanager.cpp \
+    gnattview.cpp
 
 HEADERS  += mainwindow.h \
     task.h \
-    taskmanager.h
+    taskmanager.h \
+    gnattview.h
 
 FORMS    += mainwindow.ui

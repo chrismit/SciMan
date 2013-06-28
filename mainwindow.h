@@ -9,6 +9,7 @@
 #include <QMap>
 
 #include "task.h"
+#include "gnattview.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,8 +37,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QTreeWidget * tasks;
-    QGraphicsView * view;
-    QGraphicsScene * scene;
+    gnattView * view;
     QSplitter * splitter;
 };
 
