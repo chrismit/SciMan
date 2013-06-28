@@ -16,63 +16,44 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QTabWidget" name="projectTab">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="tab_3">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QTreeWidget" name="taskDetails">
-              <column>
-               <property name="text">
-                <string>Info</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Task</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Duration</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Start</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>End</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Predecessors</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGraphicsView" name="gnattView"/>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QGraphicsView" name="gnattView"/>
+    </item>
+    <item>
+     <widget class="QTreeWidget" name="taskDetails">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <column>
+       <property name="text">
+        <string>Info</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Task</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Duration</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>End</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Predecessors</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -92,7 +73,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
  </widget>

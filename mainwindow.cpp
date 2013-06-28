@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QSplitter>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -8,7 +9,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow){
     ui->setupUi(this);
+    //make a splitter for the tasks
+    QSplitter * splitter = new QSplitter(Qt::Horizontal);
+    splitter->addWidget(ui->taskDetails);
+    splitter->addWidget(ui->gnattView);
+    setCentralWidget(splitter);
     tasks = ui->taskDetails;
+
+    //Sample task
     Task * task = new Task();
     task->start = QDateTime::fromString("2013-06-27 15:00", "yyyy-MM-dd HH:mm");
     task->end = QDateTime::fromString("2013-06-30 19:00", "yyyy-MM-dd HH:mm");
@@ -16,6 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     task->name = "Do Something";
     task->duration = task->start.secsTo(task->end)/60;
     addTask(task);
+    //
+
+    //Connections
+    connect(tasks, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slot_itemChanged(QTreeWidgetItem*, int)));
+    connect(tasks, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(slot_itemDoubleClicked(QTreeWidgetItem*, int)));
+    //
+
     view = ui->gnattView;
     scene = new QGraphicsScene();
     view->setScene(scene);
@@ -26,6 +41,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
+}
+
+void MainWindow::slot_itemChanged(QTreeWidgetItem * p, int col){
+    qDebug()<<p<<col;
+}
+
+bool MainWindow::isEditable(int col){
+    if (col != 0)
+        return true;
+    return false;
+}
+
+void MainWindow::slot_itemDoubleClicked(QTreeWidgetItem * p, int col){
+    if (isEditable(col)){
+        tasks->editItem(p, col);
+    }
 }
 
 void MainWindow::addTask(Task * task){
@@ -63,6 +94,8 @@ void MainWindow::displayTasks(){
         QStringList sl;
         sl << task->statusString() << task->name << task->getDuration() << task->start.toString() << task->end.toString();
         QTreeWidgetItem * p = new QTreeWidgetItem(sl);
+        p->setFlags(p->flags()|Qt::ItemIsDragEnabled|Qt::ItemIsDropEnabled|Qt::ItemIsEditable);
         tasks->insertTopLevelItem(0,p);
+        taskItemMap.insert(p, task);
     }
 }
