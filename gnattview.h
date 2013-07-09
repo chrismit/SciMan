@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QTreeWidget>
 #include <QGraphicsRectItem>
+#include "taskmanager.h"
 
 class gnattView : public QGraphicsView
 {
@@ -14,7 +15,7 @@ public:
     void drawGnatt();
     
     QGraphicsScene * scene;
-    QTreeWidget * tasks;
+    TaskManager * tasks;
     int lastY;
     int dY;
     int dX;
